@@ -1,0 +1,52 @@
+---
+import { slugifyStr } from "@/utils/slugify";
+import { render, getEntry, type CollectionEntry } from "astro:content";
+import { getPath } from "@/utils/getPath";
+import Datetime from "./Datetime.astro";
+import Tag from "./Tag.astro";
+import { Image } from 'astro:assets';
+
+const { data, id, filePath, collection } = Astro.props;
+
+const entry = await getEntry(collection, id);
+
+if (!entry) {
+  throw new Error(`Could not find ${id}`);
+}
+const { Content } = await render(entry);
+
+const body = entry.body; // raw markdown
+const [excerpt] = body.split("<!-- more -->");
+console.log(excerpt);
+const { title, pubDatetime, modDatetime, timezone, tags, ogImage} =
+  data;
+const headerProps = {
+  style: { viewTransitionName: slugifyStr(title) },
+  class: "text-3xl font-medium decoration-dashed hover:underline mb-2",
+};
+
+
+
+---
+
+<article class="my-6" itemscope itemtype="https://schema.org/BlogPosting">
+  <a
+    href={getPath(id, filePath)}
+    itemprop="url"
+    class="flex font-serif font-medium decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+  >
+    <h3 {...headerProps} itemprop="headline">{title}</h3>
+  </a>
+  <div class="mb-2">
+    {ogImage ?<Image src={ogImage}  width="200" height="200" alt=""  class="float-left"/> : null}
+    <div set:html={excerpt} />
+  </div>
+
+  <footer  class="my-6 border-y py-2 flex border-muted">
+    <Datetime {pubDatetime} {modDatetime} {timezone} />
+     <ul class="mt-4 mb-8 sm:my-8">
+      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} />)}
+    </ul>
+
+  </footer>
+</article>

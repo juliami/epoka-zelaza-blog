@@ -1,0 +1,129 @@
+@import "tailwindcss";
+@import "./typography.css";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+:root, html{
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "Inter", "sans-serif"
+}
+
+
+:root,
+html[data-theme="light"] {
+  --background: #FAF8F4;   /* warm parchment */
+  --foreground: #1F1E1E;   /* deep charcoal */
+  --accent:     #8F6A2E;   /* refined bronze/ochre for TITLES */
+  --muted:      #E5DED2;   /* blocks, subtle fills */
+  --border:     #C7B086;   /* faint rule/borders */
+  --link:       #5C2D5A;   /* violet reserved for LINKS only */
+}
+
+html[data-theme="dark"] {
+  --background: #212737;
+  --foreground: #eaedf3;
+  --accent: #ff6b01;
+  --muted: #343f60;
+  --border: #ab4b08;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-muted) transparent;
+  }
+  html {
+    @apply overflow-y-scroll scroll-smooth;
+  }
+  body {
+    @apply flex min-h-svh flex-col bg-background font-sans text-foreground selection:bg-accent/75 selection:text-background;
+  }
+  a,
+  button {
+    @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  section,
+  footer {
+    @apply mx-auto max-w-app px-4;
+  }
+}
+
+@utility max-w-app {
+  @apply max-w-3xl;
+}
+
+.active-nav {
+  @apply underline decoration-wavy decoration-2 underline-offset-4;
+}
+
+/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 1rem;
+}
+
+
+:root{
+  --content-max: 72ch;      /* ideal reading width */
+  --lh-body: 1.75;          /* comfy lines */
+  --lh-heading: 1.15;       /* tighter headings */
+  --space-para: 0.9rem;     /* paragraph spacing */
+}
+
+main article { max-width: var(--content-max); margin-inline: auto; }
+p { line-height: var(--lh-body); margin: var(--space-para) 0; }
+h1 { font-size: clamp(2rem, 2.6rem, 4vw); line-height: var(--lh-heading); }
+h2 { font-size: clamp(1.5rem, 1.9rem, 3vw); line-height: var(--lh-heading); }
+
+.image-holder{
+  float: left;
+  margin: 0 0.5rem 0.5rem 0;
+  max-width: 28%;
+}
+.image-holder  img {
+  margin: 0;
+}
+
+
+blockquote {
+  position: relative;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: #222;
+  margin: 2em 0;
+  padding: 1em 1.5em;
+}
+
+blockquote::before,
+blockquote::after {
+  color: var(--accent); 
+  font-family: Georgia, serif;
+}
+blockquote::before {
+  content: "“";
+  font-size: 3rem;
+  position: absolute;
+  left: -5px;
+  top: -10px;
+}
+blockquote::after {
+  content: "”";
+  font-size: 3rem;
+  position: absolute;
+  right: 10px;
+  bottom: -20px;
+}
