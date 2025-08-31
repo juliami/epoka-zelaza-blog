@@ -97,33 +97,51 @@ h2 { font-size: clamp(1.5rem, 1.9rem, 3vw); line-height: var(--lh-heading); }
   margin: 0;
 }
 
+@layer base {
+  /* Override for read more button */
+  a.read-more-btn {
+    @apply no-underline hover:no-underline;
+  }
+}
 
 blockquote {
-  position: relative;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 1em;
+}
+
+/* blockquote {
   font-size: 1.25rem;
   line-height: 1.6;
   font-style: italic;
   color: #222;
   margin: 2em 0;
-  padding: 1em 1.5em;
+  display: inline;
 }
 
-blockquote::before,
-blockquote::after {
+blockquote > div {
+  position: relative;
+  padding: 1em 1.5em;
+
+
+}
+
+blockquote > div::before,
+blockquote > div::after {
   color: var(--accent); 
   font-family: Georgia, serif;
 }
-blockquote::before {
+blockquote > div::before {
   content: "“";
   font-size: 3rem;
   position: absolute;
   left: -5px;
   top: -10px;
 }
-blockquote::after {
+blockquote > div::after {
   content: "”";
   font-size: 3rem;
   position: absolute;
   right: 10px;
   bottom: -20px;
-}
+} */

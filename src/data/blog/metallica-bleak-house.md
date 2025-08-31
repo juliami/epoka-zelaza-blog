@@ -15,7 +15,6 @@ description:
 
 
 <blockquote>Welcome to where time stands still, no one leaves and no one will...</blockquote>
-
 Muzycy Metalliki często podkreślają, jak wiele zawdzięczają NWOBHM. Świadczą o tym zresztą covery Diamond Head, Blitzkrieg i Sweet Savage, a także fakt, że pierwszą trasę koncertową (Kill 'Em All for One Tour w 1983) zagrali jako support Raven.
 
 <!-- more -->
