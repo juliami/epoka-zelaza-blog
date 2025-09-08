@@ -1,6 +1,6 @@
 ---
 import { slugifyStr } from "@/utils/slugify";
-import { render, getEntry, type CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 import { getPath } from "@/utils/getPath";
 import Datetime from "./Datetime.astro";
 import Tag from "./Tag.astro";
@@ -13,11 +13,10 @@ const entry = await getEntry(collection, id);
 if (!entry) {
   throw new Error(`Could not find ${id}`);
 }
-const { Content } = await render(entry);
 
 const body = entry.body; // raw markdown
 const [excerpt] = body.split("<!-- more -->");
-console.log(excerpt);
+
 const { title, pubDatetime, modDatetime, timezone, tags, ogImage} =
   data;
 const headerProps = {
